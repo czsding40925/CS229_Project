@@ -1,0 +1,12 @@
+Block size: 21
+Offline_time: [600, 150, 150, 150, 150, 7200, 1]
+Go pulse width: 0.02
+Nogo pulse width: 0.01
+Response window end pulse width: 0.05
+Offline start pulse width: 0.07
+Offline stop pulse width: 1
+Hit pulse width: 0.005
+Miss alarm pulse width: 0.01
+Number of rewarded trials: 72
+Comments: 
+engaged until the end
