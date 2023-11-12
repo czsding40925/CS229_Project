@@ -4,6 +4,7 @@
 % indicates responsiveness to cue 
 % the threshold is arbitrary for now
 
+load("tagged_unit_ids.mat")
 load('Behavior_Camera_Stim_Struct.mat')
 % Constants
 samplingRate = 30000;  % 30kHz sampling rate
