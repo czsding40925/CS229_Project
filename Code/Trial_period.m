@@ -6,7 +6,6 @@
 % SpikeTimes: time at which the spike is detected 
 load("Behavior_Camera_Stim_Struct.mat")
 load("tagged_unit_ids.mat")
-% To do
 offline_start = beh_cam_stim.OfflineStartStamps;
 offline_end = beh_cam_stim.OfflineEndStamps; 
 
@@ -28,12 +27,12 @@ for i = 1:5
     end  
 
     % only care about offline period for now 
-    offline_period_i = filteredData(:,2) >=start_i & filteredData(:,2) <=end_i; 
-    data_offline_i = filteredData(offline_period_i, :);
-    data_offline_i(:,2) = data_offline_i(:,2)/30000; % change it to seconds 
+    trial_period_i = filteredData(:,2) >=start_i & filteredData(:,2) <=end_i; 
+    data_trial_i = filteredData(trial_period_i, :);
+    data_trial_i(:,2) = data_trial_i(:,2)/30000; % change it to seconds 
 
     % This plot generates firing patterns during offline period 
     % (The function plots anything but whatever for now) 
-    plotNeuronFiring(data_offline_i)
+    plotNeuronFiring(data_trial_i)
 end 
 
