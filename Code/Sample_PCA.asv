@@ -1,0 +1,51 @@
+% Try sample PCA 
+% Quick reminder of data 
+% OfflineStartStamps: start of offline in between trial blocks
+% OfflineEndStamps: end of offline in between trial blocks
+% ChannelID: channel identity of the spike detected at that time point
+% SpikeTimes: time at which the spike is detected 
+
+% O
+% To do
+offline_start = beh_cam_stim.OfflineStartStamps;
+offline_end = beh_cam_stim.OfflineEndStamps; 
+
+% Sample offline period 
+start_1 = offline_start(1);
+end_1 = offline_end(1); 
+
+% this data gives u the which neuron(channel) fired at what time. 
+data = [channelID spikeTimes];
+offline_period_i = data(:,2) >=start_1 & data(:,2) <=end_1; 
+data_offline_i = data(offline_period_i, :);
+data_truncated = data(1:800,:); 
+% writematrix(data_truncated, "sample_data.csv")
+% plotNeuronFiring(data_truncated)
+% plotNeuronFiring(data_offline_i)
+transformedData = transformNeuronData(data_truncated);
+% channelID_list(); %list of channels in the 
+
+
+% Step 1: Organize Your Data
+% Your data should be organized in a matrix format where each 
+% row represents a different time point and each column represents a different neuron.
+% For instance, if you have recorded 100 neurons over 1000 time points, your data matrix 
+% should be 1000 rows by 100 neurons.
+
+% Step 2: Preprocess the Data
+% Center the Data: PCA is sensitive to the scale of the data, so it%s important to center the data by subtracting the mean of each neuron's activity.
+
+%data = [your_data_matrix]; % Replace with your data matrix
+%data_centered = data - mean(data);
+
+% Step 3: Perform PCA 
+%[coeff, score, latent, tsquared, explained, mu] = pca(data_centered);
+
+% coeff: Principal component coefficients, indicating the direction of each principal component in the original data space.
+% score: Principal component scores, representing your original data in the new PCA space.
+% latent: Eigenvalues, indicating the amount of variance captured by each principal component.
+% tsquared: Hotelling's T-squared statistic for each observation.
+% explained: The percentage of total variance explained by each principal component.
+% mu: Estimated means of the input data.
+
+
