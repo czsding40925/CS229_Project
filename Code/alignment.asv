@@ -1,0 +1,39 @@
+% align this with cues 
+% Neural data and lever position data 
+% End goal
+% For each trial 
+    % Let x_1, ..., x_d be neuron firing rate (d=96)
+    % p = lever position (average?), which can be a predictor for learning
+
+load("Behavior_Camera_Stim_Struct.mat")
+load("tagged_unit_ids.mat")
+cueTimes = beh_cam_stim.GoStamps;
+% Constants
+samplingRate = 30000;  % 30kHz sampling rate
+preCueWindow = 2.5 * samplingRate;  % 1 second before cue, converted to samples
+postCueWindow = 2.5 * samplingRate;  % 1.5 seconds after cue, converted to samples
+% the cue windows might be a little bit arbitrary...
+% this data gives u the which neuron(channel) fired at what time. 
+data = [channelID spikeTimes];
+% Only consider the corticol_good neuron
+isNeuronOfInterest = ismember(data(:, 1), cortical_good);
+filteredData = data(isNeuronOfInterest, :);
+% Create a n*2 matrix (n=100, number of cues) of cue windows 
+
+cue_windows = zeros(length(cueTimes),2);
+for i = 1:length(cueTimes)
+    this_cueTime = cueTimes(i);
+    cue_windows(i,:) = [cueTimes(i)-preCueWindow cueTimes(i)+postCueWindow];
+end 
+
+% Try: average lever position 
+lever_position = beh_cam_stim.LeverPosition;
+% compute average lever position for each cue 
+average_lp = zeros(length(cueTimes));
+for i=1:length(cueTimes)
+    current_indices = lever_position(:,1) >= cue_windows(i,1) & lever_position(:,1) <= cue_windows(i,2);
+    average_lp(i) = mean(lever_position(current_indices, 2));  
+end 
+
+% Try: spike rate 
+ 
