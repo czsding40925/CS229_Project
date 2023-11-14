@@ -35,15 +35,16 @@ lever_position_per_cue = cell(length(cueTimes),1);
 neural_spikes_per_cue = cell(length(cueTimes),1);
 for i=1:length(cueTimes)
     current_indices = lever_position(:,1) >= cue_windows(i,1) & lever_position(:,1) <= cue_windows(i,2);
+    current_indices_ns = filteredData(:,2) >= cue_windows(i,1) & filteredData(:,2) <= cue_windows(i,2);
     lever_position_per_cue{i} = lever_position(current_indices, 2);  
-    neural_spikes_per_cue{i} = filteredData(current_indices,1);
+    neural_spikes_per_cue{i} = filteredData(current_indices_ns,1);
 end 
 
 aligned_data = [lever_position_per_cue, neural_spikes_per_cue];
 save("aligned_data.mat",'aligned_data')
 
 % Try third cue
-current_index = lever_position(:,1) >= cue_windows(9,1) & lever_position(:,1) <= cue_windows(9,2);
+current_index = lever_position(:,1) >= cue_windows(17,1) & lever_position(:,1) <= cue_windows(17,2);
 current_lp = lever_position(current_index, 2);
 % plot(current_lp)
 % Try: spike rate 
