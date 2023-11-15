@@ -14,8 +14,8 @@ X_noisy = X + noiseStd * randn(size(X));
 % distributionNames = repmat({'mn'}, 1, size(X, 2));
 % distributionNames{58} = 'mvmn';  % Change 'mvmn' to 'bernoulli' if the feature is binary
 
-% nbModel = fitcnb(X, y);
-nbModel = fitcnb(X_noisy, y);
+nbModel = fitcnb(X, y);
+% nbModel = fitcnb(X_noisy, y);
 
 % Perform 10-fold cross-validation
 CVMdl = crossval(nbModel, 'KFold', 10);

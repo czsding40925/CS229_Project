@@ -32,4 +32,4 @@ end
 
 % Overall performance
 meanAccuracy = mean(accuracy);
-disp(['Mean Accuracy: ', num2str(meanAccuracy)]);
+disp(['Mean Accuracy: ', num2str(meanAccuracy)]); 
