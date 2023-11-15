@@ -12,6 +12,7 @@ cueTimes = beh_cam_stim.GoStamps;
 samplingRate = 30000;  % 30kHz sampling rate
 preCueWindow = 1.5 * samplingRate;  % 1 second before cue, converted to samples
 postCueWindow = 1.5 * samplingRate;  % 1.5 seconds after cue, converted to samples
+
 % the cue windows might be a little bit arbitrary...
 % this data gives u the which neuron(channel) fired at what time. 
 data = [channelID spikeTimes];
@@ -48,4 +49,31 @@ current_index = lever_position(:,1) >= cue_windows(17,1) & lever_position(:,1) <
 current_lp = lever_position(current_index, 2);
 % plot(current_lp)
 % Try: spike rate 
- 
+
+% further processing 
+% Goal: get things out put a binary y label based on the lever position
+% aligned with cue 
+y_label = zeros(length(cueTimes),1);
+for i = 1:length(y_label)
+    cellContent = aligned_data{i, 1};
+    
+    if length(cellContent) <= 5
+        y_label(i) = 0;
+    else
+        y_label(i) = 1;
+    end
+end
+
+% Extract the content in the second column of the aligned data 
+X = zeros(length(cueTimes), length(cortical_good));
+for i=1:length(cueTimes)
+    % extract neural data for each cell 
+    current_neural_data = aligned_data{i,2};
+    for j=1:length(cortical_good)
+        X(i,j) = sum(current_neural_data==cortical_good(j));
+    end
+end 
+
+%output data 
+data_main = [X y_label];
+save("data_main.mat",'data_main')
