@@ -1,3 +1,4 @@
+% Main Data processing script 
 % align this with cues 
 % Neural data and lever position data 
 % End goal
@@ -74,6 +75,10 @@ for i=1:length(cueTimes)
     end
 end 
 
-%output data 
+% output data 
 data_main = [X y_label];
 save("data_main.mat",'data_main')
+writematrix(data_main,"data_main.csv")
+
+% additional note on data 
+X_sum = sum(X); % This is the total spike count across all cues for each neuron

@@ -1,21 +1,29 @@
-% Step 1: Organize Your Data
-% Your data should be organized in a matrix format where each 
-% row represents a different time point and each column represents a different neuron.
-% For instance, if you have recorded 100 neurons over 1000 time points, your data matrix 
-% should be 1000 rows by 100 neurons.
+% Assuming your main dataset is stored in 'data_main' (100x97 matrix)
+X = data_main(:, 1:96); % Extracting features
+y = data_main(:, 97);   % Behavioral response
 
-% Step 2: Preprocess the Data
-% Center the Data: PCA is sensitive to the scale of the data, so it%s important to center the data by subtracting the mean of each neuron's activity.
+% PCA on the Overall Dataset
+[coeff, score, ~, ~, explained] = pca(X);
+figure; % Create a new figure
+scatter(score(:,1), score(:,2));
+xlabel('Principal Component 1');
+ylabel('Principal Component 2');
+title('PCA - Overall Data');
 
-%data = [your_data_matrix]; % Replace with your data matrix
-%data_centered = data - mean(data);
+% PCA for Data with Behavioral Response
+X_response = X(y == 1, :); % Data with behavioral response
+[coeff_resp, score_resp, ~, ~, explained_resp] = pca(X_response);
+figure; % Create a new figure
+scatter(score_resp(:,1), score_resp(:,2), 'r');
+xlabel('Principal Component 1');
+ylabel('Principal Component 2');
+title('PCA - Data with Behavioral Response');
 
-% Step 3: Perform PCA 
-%[coeff, score, latent, tsquared, explained, mu] = pca(data_centered);
-
-% coeff: Principal component coefficients, indicating the direction of each principal component in the original data space.
-% score: Principal component scores, representing your original data in the new PCA space.
-% latent: Eigenvalues, indicating the amount of variance captured by each principal component.
-% tsquared: Hotelling's T-squared statistic for each observation.
-% explained: The percentage of total variance explained by each principal component.
-% mu: Estimated means of the input data.
+% PCA for Data without Behavioral Response
+X_no_response = X(y == 0, :); % Data without behavioral response
+[coeff_no_resp, score_no_resp, ~, ~, explained_no_resp] = pca(X_no_response);
+figure; % Create a new figure
+scatter(score_no_resp(:,1), score_no_resp(:,2), 'b');
+xlabel('Principal Component 1');
+ylabel('Principal Component 2');
+title('PCA - Data without Behavioral Response');
