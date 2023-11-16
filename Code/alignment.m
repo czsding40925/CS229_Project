@@ -46,10 +46,9 @@ aligned_data = [lever_position_per_cue, neural_spikes_per_cue];
 save("aligned_data.mat",'aligned_data')
 
 % Try third cue
-current_index = lever_position(:,1) >= cue_windows(17,1) & lever_position(:,1) <= cue_windows(17,2);
-current_lp = lever_position(current_index, 2);
+% current_index = lever_position(:,1) >= cue_windows(17,1) & lever_position(:,1) <= cue_windows(17,2);
+% current_lp = lever_position(current_index, 2);
 % plot(current_lp)
-% Try: spike rate 
 
 % further processing 
 % Goal: get things out put a binary y label based on the lever position
@@ -80,5 +79,3 @@ data_main = [X y_label];
 save("data_main.mat",'data_main')
 writematrix(data_main,"data_main.csv")
 
-% additional note on data 
-X_sum = sum(X); % This is the total spike count across all cues for each neuron
