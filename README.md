@@ -3,7 +3,6 @@
 
 We have the following folders (WIP)
 * Papers: All the references we need 
-* Documents: Other related things (Coming soon)
-* Data (Coming soon)
-* Code (Coming soon)
-* More to come... 
+* Documents: Project Proposal and such for reference
+* Code: Contains all data and all MATLAB scripts for processing data & models
+* Scratch Plots: Some plots we made along the way
