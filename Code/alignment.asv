@@ -4,6 +4,7 @@
 % End goal for each trial 
     % x_1, ..., x_d be neuron firing rate (d varies based on the date)
     % p = lever position (average?), which can be a predictor for learning
+  
 directories = {'2023_09_12', '2023_09_14', '2023_09_15'};
 for i=1:length(directories)
     cd("Data/sch13/"+directories{i})
@@ -42,6 +43,7 @@ for i=1:length(directories)
     
     aligned_data = [lever_position_per_cue, neural_spikes_per_cue];
     save("aligned_data.mat",'aligned_data')
+    
     
     % further processing 
     % Goal: get things out put a binary y label based on the lever position
