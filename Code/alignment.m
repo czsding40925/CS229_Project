@@ -12,8 +12,8 @@ for i=1:length(directories)
     cueTimes = beh_cam_stim.GoStamps;
     % Constants
     samplingRate = 30000;  % 30kHz sampling rate
-    preCueWindow = 1.5 * samplingRate;  % 1 second before cue, converted to samples
-    postCueWindow = 2.5 * samplingRate;  % 1.5 seconds after cue, converted to samples
+    preCueWindow = 2 * samplingRate;  % 1 second before cue, converted to samples
+    postCueWindow = 3 * samplingRate;  % 1.5 seconds after cue, converted to samples
     
     % the cue windows might be a little bit arbitrary...
     % this data gives u the which neuron(channel) fired at what time. 

@@ -5,11 +5,11 @@ cueTimes = beh_cam_stim.GoStamps;
 
 % Constants
 samplingRate = 30000;  % 30kHz sampling rate
-preCueWindow = 1 * samplingRate;  % 1 second before cue, converted to samples
-postCueWindow = 1.5 * samplingRate;  % 1.5 seconds after cue, converted to samples
+preCueWindow = 2 * samplingRate;  % 1 second before cue, converted to samples
+postCueWindow = 3 * samplingRate;  % 1.5 seconds after cue, converted to samples
 
 % Select a specific channel (e.g., channel 5)
-channel = cortical_good();
+channel = cortical_good(18);
 channelSpikeTimes = spikeTimes(channelID == channel);
 
 % For each cue, get the spikes that occurred in the window around the cue
@@ -30,7 +30,7 @@ for i = 1:length(allAlignedSpikeTimes)
 end
 xlabel('Time relative to cue (s)');
 ylabel('Trial number');
-title('Raster plot for channel',cortical_good(5));
+title('Raster plot for channel',cortical_good(18));
 hold off;
 
 
