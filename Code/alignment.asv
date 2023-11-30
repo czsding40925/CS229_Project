@@ -4,7 +4,6 @@
 % End goal for each trial 
     % x_1, ..., x_d be neuron firing rate (d varies based on the date)
     % p = lever position (average?), which can be a predictor for learning
-  
 directories = {'2023_09_12', '2023_09_14', '2023_09_15'};
 for i=1:length(directories)
     cd("Data/sch13/"+directories{i})
@@ -13,8 +12,8 @@ for i=1:length(directories)
     cueTimes = beh_cam_stim.GoStamps;
     % Constants
     samplingRate = 30000;  % 30kHz sampling rate
-    preCueWindow = 1.5 * samplingRate;  % 1 second before cue, converted to samples
-    postCueWindow = 1.5 * samplingRate;  % 1.5 seconds after cue, converted to samples
+    preCueWindow = 2 * samplingRate;  % 1 second before cue, converted to samples
+    postCueWindow = 3 * samplingRate;  % 1.5 seconds after cue, converted to samples
     
     % the cue windows might be a little bit arbitrary...
     % this data gives u the which neuron(channel) fired at what time. 
@@ -35,6 +34,7 @@ for i=1:length(directories)
     lever_position_per_cue = cell(length(cueTimes),1);
     neural_spikes_per_cue = cell(length(cueTimes),1);
     for i=1:length(cueTimes)
+        % Change cue_windows(i,1) to cueTimes(i)
         current_indices = lever_position(:,1) >= cue_windows(i,1) & lever_position(:,1) <= cue_windows(i,2);
         current_indices_ns = filteredData(:,2) >= cue_windows(i,1) & filteredData(:,2) <= cue_windows(i,2);
         lever_position_per_cue{i} = lever_position(current_indices, 2);  
@@ -43,7 +43,6 @@ for i=1:length(directories)
     
     aligned_data = [lever_position_per_cue, neural_spikes_per_cue];
     save("aligned_data.mat",'aligned_data')
-    
     
     % further processing 
     % Goal: get things out put a binary y label based on the lever position
@@ -77,8 +76,5 @@ for i=1:length(directories)
     cd("..")
     cd("..")
 end 
-cd("..")
-cd("..")
-cd("..")
 
 
