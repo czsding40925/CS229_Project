@@ -27,3 +27,41 @@ average_F1_scores = mean(F1_scores,2);
 
 % Average of Mean_accuracy across columns
 average_Mean_accuracy = mean(Mean_accuracy,2);
+
+% Working with Confusion Matrices
+CF_0912 = load('CF_0912.mat').CF_0912;
+CF_0914 = load('CF_0914.mat').CF_0914;
+CF_0915 = load('CF_0915.mat').CF_0915;
+
+% Create a large figure
+figure('Name', 'Confusion Matrices', 'NumberTitle', 'off', 'Position', [100, 100, 1500, 900]);
+
+datasets = {'09/12', '09/14', '09/15'};
+models = fieldnames(CF_0912);
+allCFs = {CF_0912, CF_0914, CF_0915};
+
+% Index for subplot
+subplotIdx = 1;
+
+for i = 1:length(datasets)
+    for j = 1:length(models)
+        % Select a subplot position
+        subplot(3, 5, subplotIdx);
+        subplotIdx = subplotIdx + 1;
+
+        % Get the confusion matrix
+        CM = allCFs{i}.(models{j});
+
+        % Plot the confusion matrix
+        heatmap(CM);
+        title([models{j}, ' - ', datasets{i}]);
+
+        % Optional: Customize the plot, e.g., set axis labels
+        xlabel('Predicted Class');
+        ylabel('True Class');
+    end
+end
+
+% Optional: Adjust layout
+set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0, 1, 1]);
+
