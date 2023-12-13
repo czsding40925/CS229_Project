@@ -72,5 +72,6 @@ set(gca, 'xticklabel', Model_names);
 xlabel('Model');
 ylabel('Score');
 ylim([0 1]);
+legend('Mean Accuracy', 'F1 Score')
 title('Comparison of Average Accuracy and F1 Score for Each Model');
 
